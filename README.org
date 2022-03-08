@@ -1,0 +1,47 @@
+* CVE-2022-0847
+--------
+** Description
+    - POC for CVE-2022-0847: Linux Kernel Local Privilege Escalation Vulnerability.
+    - create by antx at 2022-03-08.
+--------
+** Detail
+    - Security researcher Max Kellermann responsibly disclosed the 'Dirty Pipe' vulnerability and stated that it affects Linux Kernel 5.8 and later versions, even on Android devices.
+    - A vulnerability in the Linux kernel since 5.8 which allows overwriting data in arbitrary read-only files. This leads to privilege escalation because unprivileged processes can inject code into root processes.
+    - A flaw was found in the way the "flags" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system. This flaw affects Linux kernel versions prior to 5.17-rc6.
+    - It is similar to [[https://nvd.nist.gov/vuln/detail/CVE-2016-5195][CVE-2016-5195]] "Dirty Cow", but is easier to exploit.
+    - The vulnerability was [[https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=9d2231c5d74e13b2a0546fee6737ee4446017903][fixed]] in Linux 5.16.11, 5.15.25 and 5.10.102.
+--------
+** CVE Severity
+    - attackComplexity: LOW
+    - attackVector: LOCAL
+    - availabilityImpact: -
+    - confidentialityImpact: -
+    - integrityImpact: HIGH
+    - privilegesRequired: -
+    - scope: -
+    - userInteraction: -
+    - version: 3.1
+    - baseScore: -
+    - baseSeverity: -
+--------
+** Affect
+    - Linux Kernel 5.8 and later versions, even on Android devices
+--------
+** POC
+    - [[./CVE-2022-0847.c][Poc]]
+--------
+** Reference
+    - Ref-Source
+        - [[https://dirtypipe.cm4all.com/][The Dirty Pipe Vulnerability]]
+        - [[https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit][CVE-2022-0847-DirtyPipe-Exploit]]
+    - Ref-Article
+        - [[https://www.bleepingcomputer.com/news/security/new-linux-bug-gives-root-on-all-major-distros-exploit-released/][new-linux-bug-gives-root-on-all-major-distros-exploit-released]]
+    - Ref-Poc
+        - [[https://github.com/Al1ex/LinuxEelvation/tree/master/CVE-2022-0847][CVE-2022-0847]]
+        - [[https://github.com/imfiver/CVE-2022-0847][CVE-2022-0847]]
+        - [[https://github.com/lucksec/CVE-2022-0847][CVE-2022-0847]]
+        - [[https://github.com/bbaranoff/CVE-2022-0847][CVE-2022-0847]]
+    - Ref-Risk
+    - CVE
+    - Ref-Related
+        - [[https://nvd.nist.gov/vuln/detail/CVE-2016-5195][CVE-2016-5195]]
